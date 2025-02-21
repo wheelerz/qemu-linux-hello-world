@@ -1,9 +1,14 @@
 #!/bin/bash
-set -e
+set -eou pipefail
 
-SCRIPT_NAME="build-and-run-kernel.sh"
+# Check if a script name was provided; if not, default to simpler/faster one
+if [ "$#" -ge 1 ]; then
+    SCRIPT_NAME="$1"
+else
+    SCRIPT_NAME="busybox-kernel-qemu.sh"
+fi
 
-# Helper function to display status
+# Display status in color
 log() {
     echo -e "\n\033[1;34m[*] $1\033[0m"
 }
